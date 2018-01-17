@@ -11,6 +11,24 @@ AV.init({
 // 如果不希望使用 masterKey 权限，可以将下面一行删除
 AV.Cloud.useMasterKey();
 
+class Area extends AV.Object {
+  toJson() {
+    return {
+      id: this.id,
+      name: this.get('name'),
+      latitude: this.get('center').latitude,
+      longitude: this.get('center').longitude,
+      radius: this.get('radius'),
+      active: this.get('active')
+    }
+  }
+  within(point) {
+    return this.get('center').kilometersTo(point) < this.get('radius')
+  }
+}
+
+AV.Object.register(Area)
+
 var app = require('./app');
 
 // 端口一定要从环境变量 `LEANCLOUD_APP_PORT` 中获取。
