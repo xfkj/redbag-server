@@ -2,6 +2,7 @@ node_modules
 static
 npm-debug.log
 start.sh
+wx.js
 .avoscloud
 .leancloud
 
